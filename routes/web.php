@@ -32,6 +32,7 @@ Route::prefix('category')->group(function () {
 });
 
 
+//Image
 Route::prefix('brand')->group(function () {
     Route::get('/all', [BrandController::class,'index'])->name('all.brand');
     Route::post('/', [BrandController::class,'store'])->name('add.brand');
@@ -39,6 +40,16 @@ Route::prefix('brand')->group(function () {
     Route::put('/{brand}', [BrandController::class,'update'])->name('update.brand');
     Route::get('/delete/{id}', [BrandController::class,'delete'])->name('delete.brand');
 });
+
+//Multic Image
+Route::prefix('multipic')->group(function () {
+    Route::get('/image', [BrandController::class,'multipic'])->name('all.multipic');
+    Route::post('/', [BrandController::class,'multipicStore'])->name('add.multipic');
+    Route::get('/{multipic}', [BrandController::class,'multipicEdit'])->name('edit.multipic');
+    Route::put('/{multipic}', [BrandController::class,'multipicUpdate'])->name('update.multipic');
+    Route::get('/delete/{id}', [BrandController::class,'multipicDelete'])->name('delete.multipic');
+});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //$users=User::all();
