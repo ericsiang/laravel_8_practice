@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -29,10 +30,16 @@ class BrandController extends Controller
 
         $brand_img=$request->file('brand_img');
         $img_name=hexdec(uniqid()).'.'.strtolower($brand_img->getClientOriginalExtension());
-        $last_img='img/brand/';
-        $brand_img->move($last_img,$img_name);
 
-        $validated['brand_img']=$last_img.$img_name;
+        //未使用套件上傳圖片
+        //$last_img='img/brand/';
+        //$brand_img->move($last_img,$img_name);
+
+        //使用Image套件上傳圖片
+        $store_src='img/brand/'.$img_name;
+        Image::make($brand_img)->resize(300,200)->save($store_src);
+
+        $validated['brand_img']=$store_src;
         $Brand=Brand::create($validated);
         //dd($category);
         return redirect()->route('all.brand');
