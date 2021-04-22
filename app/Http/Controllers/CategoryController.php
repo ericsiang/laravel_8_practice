@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+
+
     public function index(){
         // $categories=DB::table('categories')
         //                         ->join('users','categories.user_id','users.id')
