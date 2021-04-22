@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SliderController;
@@ -38,6 +39,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pdelete/{id}', [CategoryController::class,'Pdelete'])->name('pdelete.category');
     });
 
+    //about
+    Route::prefix('about')->group(function () {
+        Route::get('/all', [AboutController::class,'index'])->name('all.about');
+        Route::post('/', [AboutController::class,'store'])->name('add.about');
+        Route::get('/{about}', [AboutController::class,'edit'])->name('edit.about');
+        Route::put('/{about}', [AboutController::class,'update'])->name('update.about');
+        Route::get('/delete/{about}', [AboutController::class,'delete'])->name('delete.about');
+    });
 
     //Brand Image
     Route::prefix('brand')->group(function () {
