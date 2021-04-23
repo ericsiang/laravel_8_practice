@@ -4,10 +4,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -21,9 +23,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', [HomeController::class,'index']);
-
-
+Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/contact', [ContactController::class,'index'])->name('contact');
+Route::post('/contact/form', [ContactController::class,'contactForm'])->name('add.contact.form');
 
 
 //後台
@@ -46,6 +48,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{about}', [AboutController::class,'edit'])->name('edit.about');
         Route::put('/{about}', [AboutController::class,'update'])->name('update.about');
         Route::get('/delete/{about}', [AboutController::class,'delete'])->name('delete.about');
+    });
+
+    //contact
+    Route::prefix('contact')->group(function () {
+        Route::get('/all', [ContactController::class,'Admin_index'])->name('all.contact');
+        Route::post('/', [ContactController::class,'Admin_store'])->name('add.contact');
+        Route::get('/{contact}', [ContactController::class,'Admin_edit'])->name('edit.contact');
+        Route::put('/{contact}', [ContactController::class,'Admin_update'])->name('update.contact');
+        Route::get('/delete/{contact}', [ContactController::class,'Admin_delete'])->name('delete.contact');
+    });
+
+    //contact
+    Route::prefix('contact')->group(function () {
+        Route::get('/form/all', [ContactController::class,'Admin_index_form'])->name('all.msg');
     });
 
     //Brand Image
@@ -75,6 +91,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [SliderController::class,'delete'])->name('delete.slider');
     });
 
+
+    //user
+     //Slider
+    Route::prefix('user')->group(function () {
+        Route::get('/upass', [UserController::class,'upass_index'])->name('user.upass');
+        Route::post('/upass', [UserController::class,'upass_store'])->name('update.pass');
+        Route::get('/profile', [UserController::class,'profile_index'])->name('user.profile');
+        Route::post('/profile', [UserController::class,'profile_store'])->name('update.profile');
+    });
 });
 
 

@@ -67,9 +67,31 @@
                     </ul>
                 </li>
 
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                        data-target="#ui-elements" aria-expanded="false" aria-controls="ui-elements">
+                        <i class="mdi mdi-folder-multiple-outline"></i>
+                        <span class="nav-text">Contact Page</span> <b class="caret"></b>
+                    </a>
+                    <ul class="collapse" id="ui-elements" data-parent="#sidebar-menu">
+                        <div class="sub-menu">
 
 
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="{{ route('all.contact') }}">
+                                    <span class="nav-text">Contact Profile</span> <b class="caret"></b>
+                                </a>
+                            </li>
 
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="{{ route('all.msg') }}">
+                                    <span class="nav-text">Contact Message</span> <b class="caret"></b>
+                                </a>
+                            </li>
+
+                        </div>
+                    </ul>
+                </li>
 
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
